@@ -79,8 +79,8 @@ impl Runner {
                 let min_ledger_diff_between_txs =
                     horizon_helper::tx_frequency_for_account(self.horizon.clone(), admin_address)
                         .await?;
-                // If there's less than 10 ledgers between transactions, it's likely a hot wallet
-                if min_ledger_diff_between_txs <= 10 {
+                // If there's less than 12 ledgers (1 min) between transactions, it's likely a hot wallet
+                if min_ledger_diff_between_txs <= 12 {
                     Ok(AccountType::HotWallet)
                 } else {
                     Ok(AccountType::MPC)
