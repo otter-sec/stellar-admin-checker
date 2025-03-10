@@ -4,7 +4,7 @@ A command-line tool for checking Soroban smart contract admin wallet types on th
 
 ## Overview
 
-Admin Checker is a utility that helps identify whether a Soroban smart contract's admin wallet is a hot wallet (potentially less secure) or a multisig/cold wallet (more secure). This tool is useful for:
+Admin Checker is a utility that helps identify whether a Soroban smart contract's admin wallet is a hot wallet or a multisig/cold wallet. This tool is useful for:
 
 - Smart contract security audits
 - Verifying contract ownership patterns
@@ -19,12 +19,12 @@ The tool works by:
 
 ### Prerequisites
 
-- Rust and Cargo (latest stable version)
+- Rust and Cargo
 
 ### Building from Source
 
 ```bash
-git clone https://github.com/yourusername/admin-checker.git
+git clone https://github.com/otter-sec/admin-checker.git
 cd admin-checker
 cargo build --release
 ```
@@ -77,9 +77,8 @@ Admin Checker performs the following steps:
    - For contracts, reports the contract status
 
 3. **Hot Wallet Detection**: For EOA admins, analyzes transaction patterns
-   - Checks if the account is centralized (single signer with sufficient weight)
-   - Analyzes transaction frequency to determine if it's likely a hot wallet
-   - Uses a threshold of 720 ledgers (approximately 1 hour) between transactions
+   - Checks if the account is not a multisig
+   - Analyzes transaction frequency to determine if it's a hot wallet
 
 ## Networks
 
@@ -93,7 +92,7 @@ It can also use custom networks configured in your local Stellar CLI configurati
 
 ## Configuration
 
-Admin Checker will look for network configurations in the following locations:
+`admin-checker` will check the following locations for network configurations, as per the default settings of the `stellar-cli`:
 - `$XDG_CONFIG_HOME/stellar/network/`
 - `$XDG_CONFIG_HOME/soroban/network/`
 - `$HOME/.config/stellar/network/`
